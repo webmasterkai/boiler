@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { IndexLink, Link } from 'react-router';
-import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { isLoaded as isAuthLoaded, load as loadAuth } from 'redux/modules/auth';
 import { InfoBar } from 'components';
-import { pushState } from 'redux-router';
 
 const title = 'React Redux Example';
 const description = 'All the modern best practices in one example.';
@@ -23,8 +21,8 @@ const meta = {
       'og:title': title,
       'og:description': description,
       'twitter:card': 'summary',
-      'twitter:site': '@erikras',
-      'twitter:creator': '@erikras',
+      'twitter:site': '@CAPE_io',
+      'twitter:creator': '@kaicurry',
       'twitter:title': title,
       'twitter:description': description,
       'twitter:image': image,
@@ -46,12 +44,10 @@ const NavbarLink = ({to, className, component, children}) => {
   );
 };
 
-@connect(
-  state => ({user: state.auth.user}),
-  {logout, pushState})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
+    navLinks: PropTypes.array.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired,
@@ -62,8 +58,10 @@ export default class App extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    // This feels like a hack. I want to trigger the redirect within Redux action.
+    // Perhaps it should happen in the login component?
     if (!this.props.user && nextProps.user) {
-      // login
+      // Redirect after login.
       this.props.pushState(null, '/loginSuccess');
     } else if (this.props.user && !nextProps.user) {
       // logout
@@ -82,13 +80,9 @@ export default class App extends Component {
     return Promise.all(promises);
   }
 
-  handleLogout(event) {
-    event.preventDefault();
-    this.props.logout();
-  }
-
+  // Is that really the best way to decide what menu items to display?
   render() {
-    const {user} = this.props;
+    const { user, navLinks } = this.props;
     const styles = require('./App.scss');
     return (
       <div className={styles.app}>
@@ -101,13 +95,13 @@ export default class App extends Component {
             </NavbarLink>
 
             <ul className="nav navbar-nav">
-              {user && <li><NavbarLink to="/chat">Chat</NavbarLink></li>}
-
-              <li><NavbarLink to="/widgets">Widgets</NavbarLink></li>
-              <li><NavbarLink to="/survey">Survey</NavbarLink></li>
-              <li><NavbarLink to="/about">About Us</NavbarLink></li>
-              {!user && <li><NavbarLink to="/login">Login</NavbarLink></li>}
-              {user && <li className="logout-link"><a href="/logout" onClick={::this.handleLogout}>Logout</a></li>}
+              {
+                navLinks.map( ({id, to, className, text}) => (
+                  <li key={id} className={className}>
+                    <NavbarLink to={to}>{text}</NavbarLink>
+                  </li>
+                ))
+              }
             </ul>
             {user &&
             <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}

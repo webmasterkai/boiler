@@ -3,7 +3,7 @@ import Component from '../components/Login/Login';
 import * as authActions from 'redux/modules/auth';
 
 function mapStateToProps({auth: {user}, db}) {
-  const path = 'join-login';
+  const path = 'login-join';
   return {
     user,
     headerMsg: db[path].headerMsg,

@@ -85,6 +85,7 @@ export function load() {
 }
 
 export function login(name) {
+  // I want to trigger the redirect on success here.
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (client) => client.post('/login', {
