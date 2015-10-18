@@ -8,7 +8,7 @@ export default class GithubButton extends Component {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     count: PropTypes.bool,
-    large: PropTypes.bool
+    large: PropTypes.bool,
   }
 
   render() {

@@ -7,14 +7,14 @@ import * as widgetActions from 'redux/modules/widgets';
 
 @connect(
   state => ({
-    saveError: state.widgets.saveError
+    saveError: state.widgets.saveError,
   }),
   dispatch => bindActionCreators(widgetActions, dispatch)
 )
 @connectReduxForm({
   form: 'widget',
   fields: ['id', 'color', 'sprocketCount', 'owner'],
-  validate: widgetValidation
+  validate: widgetValidation,
 })
 export default class WidgetForm extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class WidgetForm extends Component {
     submitting: PropTypes.bool.isRequired,
     saveError: PropTypes.object,
     formKey: PropTypes.string.isRequired,
-    values: PropTypes.object.isRequired
+    values: PropTypes.object.isRequired,
   };
 
   render() {

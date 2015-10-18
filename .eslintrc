@@ -10,6 +10,7 @@
     "react/react-in-jsx-scope": 2,
     "react/jsx-quotes": 0,
     "import/no-named-as-default": 2,
+    "import/default": 0,
     "jsx-quotes": 2,
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,

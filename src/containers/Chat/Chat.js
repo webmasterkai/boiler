@@ -7,12 +7,12 @@ import {connect} from 'react-redux';
 export default
 class Chat extends Component {
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
   };
 
   state = {
     message: '',
-    messages: []
+    messages: [],
   };
 
   componentDidMount() {
@@ -47,7 +47,7 @@ class Chat extends Component {
 
     socket.emit('msg', {
       from: this.props.user.name,
-      text: msg
+      text: msg,
     });
   }
 

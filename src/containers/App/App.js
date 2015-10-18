@@ -29,9 +29,9 @@ const meta = {
       'twitter:description': description,
       'twitter:image': image,
       'twitter:image:width': '200',
-      'twitter:image:height': '200'
-    }
-  }
+      'twitter:image:height': '200',
+    },
+  },
 };
 
 const NavbarLink = ({to, className, component, children}) => {
@@ -39,7 +39,7 @@ const NavbarLink = ({to, className, component, children}) => {
 
   return (
     <Comp to={to} className={className} activeStyle={{
-      color: '#33e0ff'
+      color: '#33e0ff',
     }}>
       {children}
     </Comp>
@@ -54,11 +54,11 @@ export default class App extends Component {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
     logout: PropTypes.func.isRequired,
-    pushState: PropTypes.func.isRequired
+    pushState: PropTypes.func.isRequired,
   };
 
   static contextTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
   };
 
   componentWillReceiveProps(nextProps) {

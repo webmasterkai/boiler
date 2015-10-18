@@ -9,7 +9,7 @@ import {load} from 'redux/modules/info';
 export default class InfoBar extends Component {
   static propTypes = {
     info: PropTypes.object,
-    load: PropTypes.func.isRequired
+    load: PropTypes.func.isRequired,
   }
 
   render() {

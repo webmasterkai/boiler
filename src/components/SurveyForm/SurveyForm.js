@@ -23,7 +23,7 @@ function asyncValidate(data) {
   fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
   validate: surveyValidation,
   asyncValidate,
-  asyncBlurFields: ['email']
+  asyncBlurFields: ['email'],
 })
 export default
 class SurveyForm extends Component {
@@ -36,7 +36,7 @@ class SurveyForm extends Component {
     resetForm: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
     pristine: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired
+    valid: PropTypes.bool.isRequired,
   }
 
   render() {
@@ -49,7 +49,7 @@ class SurveyForm extends Component {
       invalid,
       resetForm,
       pristine,
-      valid
+      valid,
       } = this.props;
     const styles = require('./SurveyForm.scss');
     const renderInput = (field, label, showAsyncValidating) =>
@@ -131,4 +131,3 @@ class SurveyForm extends Component {
     );
   }
 }
-

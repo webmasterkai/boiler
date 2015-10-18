@@ -9,11 +9,11 @@ export default class CounterButton extends Component {
   static propTypes = {
     count: PropTypes.number,
     increment: PropTypes.func.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
   }
 
   props = {
-    className: ''
+    className: '',
   }
 
   render() {
@@ -27,4 +27,3 @@ export default class CounterButton extends Component {
     );
   }
 }
-

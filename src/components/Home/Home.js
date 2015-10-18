@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { CounterButton, GithubButton } from 'components';
+import { CounterButton } from 'components';
 
 export default class Home extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    tagline: PropTypes.string.isRequired,
+  }
   render() {
     const styles = require('./Home.scss');
     // require the logo image both from client and server
     const logoImage = require('./logo.png');
+    const { title, tagline } = this.props;
     return (
       <div className={styles.home}>
         <div className={styles.masthead}>
@@ -16,28 +21,9 @@ export default class Home extends Component {
                 <img src={logoImage}/>
               </p>
             </div>
-            <h1>React Redux Example</h1>
+            <h1>{ title }</h1>
 
-            <h2>All the modern best practices in one example.</h2>
-
-            <p>
-              <a className={styles.github} href="https://github.com/erikras/react-redux-universal-hot-example"
-                 target="_blank">
-                <i className="fa fa-github"/> View on Github
-              </a>
-            </p>
-            <GithubButton user="erikras"
-                          repo="react-redux-universal-hot-example"
-                          type="star"
-                          width={160}
-                          height={30}
-                          count large/>
-            <GithubButton user="erikras"
-                          repo="react-redux-universal-hot-example"
-                          type="fork"
-                          width={160}
-                          height={30}
-                          count large/>
+            <h2>{ tagline }</h2>
 
             <p className={styles.humility}>
               Created and maintained by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>.

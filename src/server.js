@@ -20,13 +20,15 @@ import {Provider} from 'react-redux';
 import qs from 'query-string';
 import getRoutes from './routes';
 import getStatusFromRoutes from './helpers/getStatusFromRoutes';
+import defaultState from './defaultState';
 
 const pretty = new PrettyError();
 const app = new Express();
 const server = new http.Server(app);
+// Proxy our API server.
 const proxy = httpProxy.createProxyServer({
   target: 'http://localhost:' + config.apiPort,
-  ws: true
+  ws: true, // activate websocket support.
 });
 
 app.use(compression());
@@ -61,7 +63,7 @@ app.use((req, res) => {
   }
   const client = new ApiClient(req);
 
-  const store = createStore(reduxReactRouter, getRoutes, createHistory, client);
+  const store = createStore(reduxReactRouter, getRoutes, createHistory, client, defaultState);
 
   function hydrateOnClient() {
     res.send('<!doctype html>\n' +

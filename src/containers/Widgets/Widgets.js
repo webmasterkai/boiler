@@ -2,7 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import DocumentMeta from 'react-document-meta';
 import {connect} from 'react-redux';
 import * as widgetActions from 'redux/modules/widgets';
-import {isLoaded, load as loadWidgets} from 'redux/modules/widgets';
+const {isLoaded} = widgetActions;
+const loadWidgets = widgetActions.load;
+
 import {initializeWithKey} from 'redux-form';
 import { WidgetForm } from 'components';
 
@@ -11,7 +13,7 @@ import { WidgetForm } from 'components';
     widgets: state.widgets.data,
     editing: state.widgets.editing,
     error: state.widgets.error,
-    loading: state.widgets.loading
+    loading: state.widgets.loading,
   }),
   {...widgetActions, initializeWithKey })
 export default
@@ -23,7 +25,7 @@ class Widgets extends Component {
     initializeWithKey: PropTypes.func.isRequired,
     editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired,
-    editStart: PropTypes.func.isRequired
+    editStart: PropTypes.func.isRequired,
   }
 
   static fetchDataDeferred(getState, dispatch) {
@@ -103,4 +105,3 @@ class Widgets extends Component {
     );
   }
 }
-

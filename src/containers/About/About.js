@@ -4,7 +4,7 @@ import { MiniInfoBar } from 'components';
 
 export default class About extends Component {
   state = {
-    showKitten: false
+    showKitten: false,
   }
 
   handleToggleKitten() {

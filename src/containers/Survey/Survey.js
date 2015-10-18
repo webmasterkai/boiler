@@ -9,7 +9,7 @@ import {SurveyForm} from 'components';
   {initialize})
 export default class Survey extends Component {
   static propTypes = {
-    initialize: PropTypes.func.isRequired
+    initialize: PropTypes.func.isRequired,
   }
 
   handleSubmit(data) {
@@ -23,7 +23,7 @@ export default class Survey extends Component {
       email: 'bobby@gmail.com',
       occupation: 'Redux Wizard',
       currentlyEmployed: true,
-      sex: 'male'
+      sex: 'male',
     });
   }
 
