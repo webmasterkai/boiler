@@ -40,7 +40,7 @@ function handleInitialize() {
 }
 
 const actionCreators = {
-  handleSubmit,
+  onSubmit: handleSubmit,
   handleInitialize,
 };
 // Redux connections.
