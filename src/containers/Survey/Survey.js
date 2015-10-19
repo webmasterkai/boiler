@@ -61,9 +61,20 @@ function mapStateToProps(state) {
     title: 'Survey Title',
     form: state.form,
     formFields: [
-      {id: 'name', label: 'Full Name'},
-      {id: 'email', label: 'Email', hasAsyncValidate: true},
-      {id: 'occupation', label: 'Occupation'},
+      { id: 'name', label: 'Full Name', type: 'text' },
+      { id: 'email', label: 'Email', type: 'text', hasAsyncValidate: true },
+      { id: 'occupation', label: 'Occupation', type: 'text' },
+      { id: 'currentlyEmployed', label: 'Currently Employed?', type: 'checkbox' },
+      {
+        id: 'sex',
+        label: 'Gender',
+        type: 'radio',
+        options: [
+          {value: 'male', label: 'Male'},
+          {value: 'female', label: 'Female'},
+          {value: 'transgender', label: 'Transgender'},
+        ],
+      },
     ],
   };
 }

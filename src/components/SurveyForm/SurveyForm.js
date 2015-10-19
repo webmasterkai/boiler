@@ -5,7 +5,7 @@ function SurveyForm(props) {
   const {
     asyncValidating,
     dirty,
-    fields: {currentlyEmployed, sex, ...fields},
+    fields,
     active,
     handleSubmit,
     formFields,
@@ -20,31 +20,17 @@ function SurveyForm(props) {
     <div>
       <form className="form-horizontal" onSubmit={handleSubmit}>
         {
-          formFields.map( ({id, label, hasAsyncValidate}) => (
+          formFields.map( ({id, hasAsyncValidate, ...other}) => (
             <Input
               key={id}
               asyncValidating={hasAsyncValidate && asyncValidating}
               field={fields[id]}
-              label={label}
               styles={styles}
+              {...other}
             />
           ))
         }
-        <div className="form-group">
-          <label htmlFor="currentlyEmployed" className="col-sm-2">Currently Employed?</label>
-          <div className="col-sm-8">
-            <input type="checkbox" id="currentlyEmployed" {...currentlyEmployed}/>
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-2">Sex</label>
-          <div className="col-sm-8">
-            <input type="radio" id="sex-male" {...sex} value="male" checked={sex.value === 'male'}/>
-            <label htmlFor="sex-male" className={styles.radioLabel}>Male</label>
-            <input type="radio" id="sex-female" {...sex} value="female" checked={sex.value === 'female'}/>
-            <label htmlFor="sex-female" className={styles.radioLabel}>Female</label>
-          </div>
-        </div>
+
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
             <button className="btn btn-success" onClick={handleSubmit}>
