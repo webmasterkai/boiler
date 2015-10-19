@@ -38,6 +38,9 @@ function Survey({ handleInitialize, ...rest }) {
         Touched, Visited, Active, and Dirty.</p>
 
       <SurveyForm {...rest} />
+
+      { false && <pre>{ JSON.stringify(rest, null, 2) }</pre> }
+
     </div>
   );
 }

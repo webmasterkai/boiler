@@ -46,12 +46,25 @@ const actionCreators = {
   handleInitialize,
 };
 
+const reduxFormOptions = {
+  form: 'survey',
+  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
+  validate: surveyValidation,
+  asyncValidate,
+  asyncBlurFields: ['email'],
+};
+
 // Redux connections.
 
 function mapStateToProps(state) {
   return {
     title: 'Survey Title',
     form: state.form,
+    formFields: [
+      {id: 'name', label: 'Full Name'},
+      {id: 'email', label: 'Email', hasAsyncValidate: true},
+      {id: 'occupation', label: 'Occupation'},
+    ],
   };
 }
 
@@ -61,14 +74,6 @@ function mapDispatchToProps(dispatch) {
     dispatch,
   };
 }
-
-const reduxFormOptions = {
-  form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
-  validate: surveyValidation,
-  asyncValidate,
-  asyncBlurFields: ['email'],
-};
 
 // I'd really like to make this nicer. I hate the DocumentMeta thing.
 function Component({title, ...rest}) {
