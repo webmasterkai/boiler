@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import pluck from 'lodash.pluck';
 import DocumentMeta from 'react-document-meta';
-
 import Survey from '../../components/Survey/Survey';
 import { initialize, reduxForm } from 'redux-form';
 import surveyValidation from './surveyValidation';
@@ -49,6 +49,7 @@ const formFields = [
   { id: 'name', label: 'Full Name', type: 'text' },
   { id: 'email', label: 'Email', type: 'text', hasAsyncValidate: true },
   { id: 'occupation', label: 'Occupation', type: 'text' },
+  { id: 'birthday', label: 'Birthday', type: 'datetime' },
   { id: 'currentlyEmployed', label: 'Currently Employed?', type: 'checkbox' },
   {
     id: 'sex',
@@ -75,7 +76,7 @@ const formFields = [
 
 const reduxFormOptions = {
   form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex', 'genre'], // @TODO pluck.
+  fields: pluck(formFields, 'id'),
   validate: surveyValidation,
   asyncValidate,
   asyncBlurFields: ['email'],

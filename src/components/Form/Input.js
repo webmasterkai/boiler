@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import InputFlags from './InputFlags';
 import InputRadios from './InputRadios';
 import InputSelect from './InputSelect';
+import DateTimeField from 'react-bootstrap-datetimepicker';
 
 function Input({field, label, type, showFlags, options, asyncValidating, styles}) {
   const { active, dirty, error, name, touched, visited, ...inputProps } = field;
@@ -17,8 +18,10 @@ function Input({field, label, type, showFlags, options, asyncValidating, styles}
     InputEl = <InputRadios styles={styles.radioLabel} field={field} type={type} options={options} />;
   } else if (type === 'select') {
     InputEl = <InputSelect options={options} {...field} />;
+  } else if (type === 'datetime') {
+    InputEl = <DateTimeField onChange={field.onChange} inputProps={field} />;
   } else {
-    InputEl = <input type={type} className={isTypeText && 'form-control'} id={name} {...inputProps}/>;
+    InputEl = <input type={type} className={isTypeText && 'form-control'} id={name} {...inputProps} />;
   }
 
   return (

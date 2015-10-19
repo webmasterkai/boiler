@@ -31,6 +31,7 @@ export default class Html extends Component {
 
           <link rel="shortcut icon" href="/favicon.ico" />
           <link href="/react-select.css" rel="stylesheet" type="text/css" />
+          <link href="/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {Object.keys(assets.styles).map((style, key) =>
             <link href={assets.styles[style]} key={key} media="screen, projection"
