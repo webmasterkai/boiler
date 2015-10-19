@@ -21,13 +21,13 @@ app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 60000 },
 }));
 app.use(bodyParser.json());
 
 
 app.use((req, res) => {
-
+  // do not care about url query params.
   const matcher = req.url.split('?')[0].split('/').slice(1);
 
   let action = false;
@@ -36,7 +36,6 @@ app.use((req, res) => {
   let sliceIndex = 0;
 
   for (const actionName of matcher) {
-
     if (apiActions[actionName]) {
       action = apiActions[actionName];
     }
@@ -101,7 +100,6 @@ if (config.apiPort) {
     });
   });
   io.listen(runnable);
-
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
 }
