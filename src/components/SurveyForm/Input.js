@@ -1,7 +1,11 @@
 import React, { PropTypes } from 'react';
 
 function Input({field, label, asyncValidating, styles}) {
-  const { active, dirty, name, error, touched, visited, ...inputProps } = field;
+  const { active, dirty, error, name, touched, visited, ...inputProps } = field;
+  // checked, defaultChecked, defaultValue, invalid, pristine, valid, value
+  // handleBlur, handleChange, handleFocus
+  // onBlur, onChange, onDrag, onDrop, onFocus, onUpdate
+  // console.log(inputProps);
   return (
     <div className={'form-group' + (error && touched ? ' has-error' : '')}>
       <label htmlFor={name} className="col-sm-2">{label}</label>
