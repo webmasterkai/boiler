@@ -1,12 +1,10 @@
 import React, {PropTypes} from 'react';
-import DocumentMeta from 'react-document-meta';
 import SurveyForm from '../SurveyForm/SurveyForm';
 
 function Survey({ handleInitialize, ...rest }) {
   return (
     <div className="container">
       <h1>Survey</h1>
-      <DocumentMeta title="WTF. Not the place to set title: Survey"/>
 
       <p>
         This is an example of a form in redux in which all the state is kept within the redux store.
