@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import Input from './Input';
+import Input from '../Form/Input';
+import ReduxFormProps from '../Form/ReduxFormProps';
 
 function SurveyForm(props) {
   const {
@@ -26,6 +27,7 @@ function SurveyForm(props) {
               asyncValidating={hasAsyncValidate && asyncValidating}
               field={fields[id]}
               styles={styles}
+              showFlags
               {...other}
             />
           ))
@@ -43,32 +45,7 @@ function SurveyForm(props) {
         </div>
       </form>
 
-      <h4>Props from redux-form</h4>
-
-      <table className="table table-striped">
-        <tbody>
-        <tr>
-          <th>Active Field</th>
-          <td>{active}</td>
-        </tr>
-        <tr>
-          <th>Dirty</th>
-          <td className={dirty ? 'success' : 'danger'}>{dirty ? 'true' : 'false'}</td>
-        </tr>
-        <tr>
-          <th>Pristine</th>
-          <td className={pristine ? 'success' : 'danger'}>{pristine ? 'true' : 'false'}</td>
-        </tr>
-        <tr>
-          <th>Valid</th>
-          <td className={valid ? 'success' : 'danger'}>{valid ? 'true' : 'false'}</td>
-        </tr>
-        <tr>
-          <th>Invalid</th>
-          <td className={invalid ? 'success' : 'danger'}>{invalid ? 'true' : 'false'}</td>
-        </tr>
-        </tbody>
-      </table>
+      <ReduxFormProps {...{active, dirty, pristine, valid, invalid}} />
     </div>
   );
 }

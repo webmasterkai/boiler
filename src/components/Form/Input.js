@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 
-function Input({field, label, type, options, asyncValidating, styles}) {
+import InputFlags from './InputFlags';
+import InputRadios from './InputRadios';
+import Select from 'react-select';
+
+function Input({field, label, type, showFlags, options, asyncValidating, styles}) {
   const { active, dirty, error, name, touched, visited, ...inputProps } = field;
   // checked, defaultChecked, defaultValue, invalid, pristine, valid, value
   // handleBlur, handleChange, handleFocus
@@ -10,15 +14,9 @@ function Input({field, label, type, options, asyncValidating, styles}) {
 
   let InputEl = false;
   if (type === 'radio') {
-    InputEl = options.map( opt => {
-      const radioId = `{$name}-${opt.value}`;
-      return (
-        <span key={radioId}>
-          <input type={type} id={radioId} {...field} value={opt.value} checked={field.value === opt.value}/>
-          <label htmlFor={radioId} className={styles.radioLabel}>{opt.label}</label>
-        </span>
-      );
-    });
+    InputEl = <InputRadios styles={styles.radioLabel} field={field} type={type} options={options} />;
+  } else if (type === 'select') {
+    InputEl = <Select options={options} {...field} />;
   } else {
     InputEl = <input type={type} className={isTypeText && 'form-control'} id={name} {...inputProps}/>;
   }
@@ -30,14 +28,7 @@ function Input({field, label, type, options, asyncValidating, styles}) {
         { asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/> }
         { InputEl }
         { error && touched && <div className="text-danger">{error}</div> }
-        { isTypeText &&
-          <div className={styles.flags}>
-            {dirty && <span className={styles.dirty} title="Dirty">D</span>}
-            {active && <span className={styles.active} title="Active">A</span>}
-            {visited && <span className={styles.visited} title="Visited">V</span>}
-            {touched && <span className={styles.touched} title="Touched">T</span>}
-          </div>
-        }
+        { showFlags && <InputFlags {...{dirty, active, visited, touched, styles}} /> }
       </div>
     </div>
   );
