@@ -21,19 +21,23 @@ RadioOption.propTypes = {
 // Print RadioOption for each options.
 function InputRadios({options, field, ...rest}) {
   return (
-    options.map( ({value, label} )=> {
-      const id = `{$field.name}-${value}`;
-      return (
-        <RadioOption
-          id={id}
-          key={id}
-          field={field}
-          value={value}
-          label={label}
-          {...rest}
-        />
-      );
-    })
+    <div>
+      {
+        options.map( ({value, label} )=> {
+          const id = `{$field.name}-${value}`;
+          return (
+            <RadioOption
+              id={id}
+              key={id}
+              field={field}
+              value={value}
+              label={label}
+              {...rest}
+            />
+          );
+        })
+      }
+    </div>
   );
 }
 InputRadios.propTypes = {

@@ -12,10 +12,10 @@ function InputFlags({active, dirty, touched, visited, styles}) {
 }
 
 InputFlags.propTypes = {
-  active: PropTypes.bool.isRequired,
-  dirty: PropTypes.bool.isRequired,
-  visited: PropTypes.bool.isRequired,
-  touched: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
+  dirty: PropTypes.bool,
+  visited: PropTypes.bool,
+  touched: PropTypes.bool,
 };
 InputFlags.defaultProps = {};
 export default InputFlags;

@@ -33,7 +33,7 @@ function ReduxFormProps({active, dirty, pristine, valid, invalid}) {
   );
 }
 ReduxFormProps.propTypes = {
-  active: PropTypes.string.isRequired,
+  active: PropTypes.string,
   dirty: PropTypes.bool.isRequired,
   pristine: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
