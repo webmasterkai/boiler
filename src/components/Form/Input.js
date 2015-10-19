@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import InputFlags from './InputFlags';
 import InputRadios from './InputRadios';
-import Select from 'react-select';
+import InputSelect from './InputSelect';
 
 function Input({field, label, type, showFlags, options, asyncValidating, styles}) {
   const { active, dirty, error, name, touched, visited, ...inputProps } = field;
@@ -16,7 +16,7 @@ function Input({field, label, type, showFlags, options, asyncValidating, styles}
   if (type === 'radio') {
     InputEl = <InputRadios styles={styles.radioLabel} field={field} type={type} options={options} />;
   } else if (type === 'select') {
-    InputEl = <Select options={options} {...field} />;
+    InputEl = <InputSelect options={options} {...field} />;
   } else {
     InputEl = <input type={type} className={isTypeText && 'form-control'} id={name} {...inputProps}/>;
   }

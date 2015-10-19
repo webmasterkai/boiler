@@ -45,10 +45,37 @@ const actionCreators = {
   onSubmit: handleSubmit,
   handleInitialize,
 };
+const formFields = [
+  { id: 'name', label: 'Full Name', type: 'text' },
+  { id: 'email', label: 'Email', type: 'text', hasAsyncValidate: true },
+  { id: 'occupation', label: 'Occupation', type: 'text' },
+  { id: 'currentlyEmployed', label: 'Currently Employed?', type: 'checkbox' },
+  {
+    id: 'sex',
+    label: 'Gender',
+    type: 'radio',
+    options: [
+      {value: 'male', label: 'Male'},
+      {value: 'female', label: 'Female'},
+      {value: 'transgender', label: 'Transgender'},
+    ],
+  },
+  {
+    id: 'genre',
+    label: 'Musical Genre',
+    type: 'select',
+    // https://itunes.apple.com/WebObjects/MZStoreServices.woa/ws/genres
+    options: [
+      {value: '13', label: 'New Age'},
+      {value: '11', label: 'Jazz'},
+      {value: '6', label: 'Country'},
+    ],
+  },
+];
 
 const reduxFormOptions = {
   form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
+  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex', 'genre'], // @TODO pluck.
   validate: surveyValidation,
   asyncValidate,
   asyncBlurFields: ['email'],
@@ -60,22 +87,7 @@ function mapStateToProps(state) {
   return {
     title: 'Survey Title',
     form: state.form,
-    formFields: [
-      { id: 'name', label: 'Full Name', type: 'text' },
-      { id: 'email', label: 'Email', type: 'text', hasAsyncValidate: true },
-      { id: 'occupation', label: 'Occupation', type: 'text' },
-      { id: 'currentlyEmployed', label: 'Currently Employed?', type: 'checkbox' },
-      {
-        id: 'sex',
-        label: 'Gender',
-        type: 'radio',
-        options: [
-          {value: 'male', label: 'Male'},
-          {value: 'female', label: 'Female'},
-          {value: 'transgender', label: 'Transgender'},
-        ],
-      },
-    ],
+    formFields,
   };
 }
 
