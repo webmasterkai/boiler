@@ -3,9 +3,9 @@ import React, { PropTypes } from 'react';
 import InputFlags from './InputFlags';
 import InputRadios from './InputRadios';
 import InputSelect from './InputSelect';
-import DateTimeField from 'react-bootstrap-datetimepicker';
+import InputDate from './InputDate';
 
-function Input({field, label, type, showFlags, options, asyncValidating, styles}) {
+function Input({field, label, type, showFlags, options, asyncValidating, styles, ...other}) {
   const { active, dirty, error, name, touched, visited, ...inputProps } = field;
   // checked, defaultChecked, defaultValue, invalid, pristine, valid, value
   // handleBlur, handleChange, handleFocus
@@ -19,7 +19,7 @@ function Input({field, label, type, showFlags, options, asyncValidating, styles}
   } else if (type === 'select') {
     InputEl = <InputSelect options={options} {...field} />;
   } else if (type === 'datetime') {
-    InputEl = <DateTimeField onChange={field.onChange} inputProps={field} />;
+    InputEl = <InputDate field={field} {...other} />;
   } else {
     InputEl = <input type={type} className={isTypeText && 'form-control'} id={name} {...inputProps} />;
   }
@@ -31,7 +31,7 @@ function Input({field, label, type, showFlags, options, asyncValidating, styles}
         { asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/> }
         { InputEl }
         { error && touched && <div className="text-danger">{error}</div> }
-        { showFlags && <InputFlags {...{dirty, active, visited, touched, styles}} /> }
+        { showFlags && type !== 'datetime' && <InputFlags {...{dirty, active, visited, touched, styles}} /> }
       </div>
     </div>
   );
