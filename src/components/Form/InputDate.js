@@ -7,6 +7,7 @@ localizers(moment);
 
 function editFormatToISO(string, editFormats, previousValue) {
   // Can we just return the previousValue always?
+  // So far this is working as expected...
   return previousValue;
   // // Do not do anything.
   // if (!string) {
@@ -27,6 +28,7 @@ function editFormatToISO(string, editFormats, previousValue) {
 
 // Not sure we need to pass other to DateTimePicker.
 function InputDate({editFormat, parse, field: {onBlur, onChange, value, ...other} }) {
+  // @TODO I need to figure out why setting editFormat makes things crazy.
   return (
     <DateTimePicker
       parse={parse}
