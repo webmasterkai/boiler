@@ -5,6 +5,12 @@
     "mocha": true
   },
   "rules": {
+    "id-length": [2, {
+      "min": 3,
+      "max": 30,
+      "properties": "never",
+      "exceptions": ["r", "_", "id", "rq", "db", "cb", "io"]
+    }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
