@@ -6,7 +6,7 @@ import DocumentMeta from 'react-document-meta';
 import Survey from '../../components/Survey/Survey';
 import { initialize, reduxForm } from 'redux-form';
 import surveyValidation from './surveyValidation';
-
+import formInfo from './surveyInfo';
 // Define our custom functions and action handlers.
 // Move to another file someday/somehow?
 
@@ -45,38 +45,10 @@ const actionCreators = {
   onSubmit: handleSubmit,
   handleInitialize,
 };
-const formFields = [
-  { id: 'name', label: 'Full Name', type: 'text' },
-  { id: 'email', label: 'Email', type: 'text', hasAsyncValidate: true },
-  { id: 'occupation', label: 'Occupation', type: 'text' },
-  { id: 'birthday', label: 'Birthday', type: 'datetime' },
-  { id: 'currentlyEmployed', label: 'Currently Employed?', type: 'checkbox' },
-  {
-    id: 'sex',
-    label: 'Gender',
-    type: 'radio',
-    options: [
-      {value: 'male', label: 'Male'},
-      {value: 'female', label: 'Female'},
-      {value: 'transgender', label: 'Transgender'},
-    ],
-  },
-  {
-    id: 'genre',
-    label: 'Musical Genre',
-    type: 'select',
-    // https://itunes.apple.com/WebObjects/MZStoreServices.woa/ws/genres
-    options: [
-      {value: '13', label: 'New Age'},
-      {value: '11', label: 'Jazz'},
-      {value: '6', label: 'Country'},
-    ],
-  },
-];
 
 const reduxFormOptions = {
   form: 'survey',
-  fields: pluck(formFields, 'id'),
+  fields: pluck(formInfo.fields, 'id'),
   validate: surveyValidation,
   asyncValidate,
   asyncBlurFields: ['email'],
@@ -86,9 +58,9 @@ const reduxFormOptions = {
 
 function mapStateToProps(state) {
   return {
-    title: 'Survey Title',
+    title: formInfo.title,
     form: state.form,
-    formFields,
+    formFields: formInfo.fields,
   };
 }
 
