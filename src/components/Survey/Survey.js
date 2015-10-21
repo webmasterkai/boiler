@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import SurveyForm from '../SurveyForm/SurveyForm';
+import Form from '../Form/Form';
 
 function Survey({ handleInitialize, ...rest }) {
   return (
@@ -37,7 +37,7 @@ function Survey({ handleInitialize, ...rest }) {
       <p>The circles to the left of the inputs correspond to flags provided by <code>redux-form</code>:
         Touched, Visited, Active, and Dirty.</p>
 
-      <SurveyForm {...rest} />
+      <Form {...rest} />
 
       { false && <pre>{ JSON.stringify(rest, null, 2) }</pre> }
 
