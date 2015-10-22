@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import pluck from 'lodash.pluck';
 import DocumentMeta from 'react-document-meta';
 import Survey from '../../components/Survey/Survey';
-import { initialize, reduxForm } from 'redux-form';
+import { initialize, connectReduxForm } from 'redux-form';
 // import surveyValidation from './surveyValidation';
 import formValidation from '../../utils/formValidation';
 import formInfo from './surveyInfo';
@@ -42,47 +41,34 @@ function handleInitialize() {
   });
 }
 
-const actionCreators = {
-  onSubmit: handleSubmit,
-  handleInitialize,
-};
-
-const reduxFormOptions = {
-  form: 'survey',
-  fields: pluck(formInfo.fields, 'id'),
-  // validate: surveyValidation,
-  validate: formValidation(formInfo.fields),
-  asyncValidate,
-  asyncBlurFields: ['email'],
-};
-
 // Redux connections.
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {
     title: formInfo.title,
-    form: state.form,
     formFields: formInfo.fields,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators(actionCreators, dispatch),
-    dispatch,
   };
 }
 
 // I'd really like to make this nicer. I hate the DocumentMeta thing.
 function Component({title, ...rest}) {
+  const formOptions = {
+    form: 'survey',
+    fields: pluck(formInfo.fields, 'id'),
+    // validate: surveyValidation,
+    validate: formValidation(formInfo.fields),
+    asyncValidate,
+    asyncBlurFields: ['email'],
+  };
+  const FormEl = connectReduxForm(formOptions)(Survey);
   return (
     <div>
       <DocumentMeta title={title} />
-      <Survey {...rest} />
+      <FormEl {...rest} onSubmit={handleSubmit} handleInitialize={handleInitialize} />
     </div>
   );
 }
 Component.props = {
   title: PropTypes.string.isRequired,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm(reduxFormOptions)(Component));
+export default connect(mapStateToProps)(Component);
