@@ -2,7 +2,7 @@ import createField, { genderOptions } from '../../utils/createField';
 
 export default {
   id: 'survey',
-  title: 'Survey',
+  title: 'Survey Title',
   type: 'survey',
   description: 'Blah blah',
   fields: [

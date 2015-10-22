@@ -5,7 +5,8 @@ import pluck from 'lodash.pluck';
 import DocumentMeta from 'react-document-meta';
 import Survey from '../../components/Survey/Survey';
 import { initialize, reduxForm } from 'redux-form';
-import surveyValidation from './surveyValidation';
+// import surveyValidation from './surveyValidation';
+import formValidation from '../../utils/formValidation';
 import formInfo from './surveyInfo';
 // Define our custom functions and action handlers.
 // Move to another file someday/somehow?
@@ -49,7 +50,8 @@ const actionCreators = {
 const reduxFormOptions = {
   form: 'survey',
   fields: pluck(formInfo.fields, 'id'),
-  validate: surveyValidation,
+  // validate: surveyValidation,
+  validate: formValidation(formInfo.fields),
   asyncValidate,
   asyncBlurFields: ['email'],
 };
